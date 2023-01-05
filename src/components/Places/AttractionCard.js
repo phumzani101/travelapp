@@ -1,11 +1,18 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 const {width} = Dimensions.get('window');
 
-const AttractionCard = ({place, style = {}}) => {
+const AttractionCard = ({place, style = {}, onPress}) => {
   return (
-    <View style={[styles.card, style]}>
+    <TouchableOpacity onPress={onPress} style={[styles.card, style]}>
       <Image
         source={{uri: place?.images[0] || 'https://placeimg.com/640/480/any'}}
         style={styles.image}
@@ -14,7 +21,7 @@ const AttractionCard = ({place, style = {}}) => {
         <Text style={styles.title}>{place?.name}</Text>
         <Text style={styles.city}>{place?.city}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

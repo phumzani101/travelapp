@@ -7,7 +7,7 @@ import homeStyles from './homeStyles';
 import placesData from '../../data/places.json';
 import categoriesData from '../../data/categories.json';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [places, setPlaces] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -61,6 +61,7 @@ const HomeScreen = () => {
         renderItem={({item, index}) => (
           <AttractionCard
             place={item}
+            onPress={() => navigation.navigate('PlaceDetails', {place: item})}
             key={item.id}
             style={index % 2 === 0 ? homeStyles.attractionCard : {}}
           />
