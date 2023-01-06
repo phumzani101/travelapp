@@ -60,10 +60,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerContainer: {
+    marginVertical: 40,
+  },
+  textContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginVertical: 40,
   },
   title: {color: '#000'},
   city: {

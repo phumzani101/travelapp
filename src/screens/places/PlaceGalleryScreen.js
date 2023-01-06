@@ -10,7 +10,7 @@ import styles from './styles';
 
 const PlaceGalleryScreen = ({route, navigation}) => {
   const {images} = route?.params || {};
-  console.log(images);
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList

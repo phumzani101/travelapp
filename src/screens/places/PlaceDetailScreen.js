@@ -7,10 +7,10 @@ import {
   Text,
   View,
 } from 'react-native';
+import Share from 'react-native-share';
 import Title from '../../components/layout/Title';
 import PlaceInfo from '../../components/Places/PlaceInfo';
 import styles from './styles';
-import homeStyles from './styles';
 
 const PlaceDetailScreen = ({route, navigation}) => {
   const {place} = route?.params || {};
@@ -20,6 +20,20 @@ const PlaceDetailScreen = ({route, navigation}) => {
 
   const onGalleryPress = () => {
     navigation.navigate('PlaceGallery', {images: place?.images});
+  };
+
+  const onShare = () => {
+    const options = {
+      title: place?.name,
+      message: 'Hey, I want to share with you.',
+    };
+    Share.open(options)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        err && console.log(err);
+      });
   };
 
   return (
@@ -32,10 +46,8 @@ const PlaceDetailScreen = ({route, navigation}) => {
           <Pressable hitSlop={8} onPress={() => navigation.goBack()}>
             <Text style={styles.headerIcon}>Back</Text>
           </Pressable>
-          <Pressable hitSlop={8} onPress={() => navigation.goBack()}>
-            <Text onPress={() => navigation.goBack()} style={styles.headerIcon}>
-              Share
-            </Text>
+          <Pressable hitSlop={8} onPress={() => onShare()}>
+            <Text style={styles.headerIcon}>Share</Text>
           </Pressable>
         </View>
 
@@ -58,11 +70,10 @@ const PlaceDetailScreen = ({route, navigation}) => {
         </Pressable>
       </ImageBackground>
       <View style={styles.headerContainer}>
+        <Title style={styles.title} text={place.name} />
+
         <View style={styles.textContainer}>
-          <Title style={styles.title} text={place.name} />
           <Text style={styles.city}>{place.city}</Text>
-        </View>
-        <View>
           <Title style={styles.title} text={place.entry_price} />
         </View>
       </View>
